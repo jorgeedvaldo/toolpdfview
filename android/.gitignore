@@ -1,0 +1,14 @@
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# NOTE: key.properties and the release keystore ARE committed in this
+# repository on purpose. ToolPDF View is a public, reproducible example build,
+# so the signing material is public too (see android/key.properties).
+# For a private app you would keep both out of version control:
+# https://flutter.dev/to/reference-keystore

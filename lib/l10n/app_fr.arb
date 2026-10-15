@@ -1,0 +1,62 @@
+{
+  "@@locale": "fr",
+  "appTitle": "ToolPDF View",
+  "navFavorites": "Favoris",
+  "navRecents": "Récents",
+  "navBrowse": "Dossiers",
+  "about": "À propos",
+  "openFile": "Ouvrir un PDF",
+  "favoritesEmptyTitle": "Aucun favori pour l’instant",
+  "favoritesEmptyBody": "Touchez l’étoile pendant la lecture d’un document pour le garder ici.",
+  "recentsEmptyTitle": "Rien d’ouvert pour l’instant",
+  "recentsEmptyBody": "Les PDF que vous ouvrez apparaîtront ici.",
+  "folderEmpty": "Aucun PDF dans ce dossier",
+  "clearRecents": "Effacer les récents",
+  "clearRecentsQuestion": "Retirer tous les documents de la liste des récents ?",
+  "cancel": "Annuler",
+  "clear": "Effacer",
+  "remove": "Retirer de la liste",
+  "addToFavorites": "Ajouter aux favoris",
+  "removeFromFavorites": "Retirer des favoris",
+  "fileMissing": "Ce fichier n’est plus sur l’appareil",
+  "couldNotOpen": "Impossible d’ouvrir ce PDF",
+  "internalStorage": "Stockage interne",
+  "shortcuts": "Raccourcis",
+  "storageRoots": "Stockage",
+  "storageAccessTitle": "Laissez ToolPDF View trouver vos fichiers",
+  "storageAccessBody": "Pour parcourir les dossiers, Android vous demande d’autoriser l’accès à vos fichiers. Vous pouvez aussi choisir un seul PDF, sans aucune autorisation.",
+  "grantAccess": "Autoriser l’accès",
+  "chooseFile": "Choisir un fichier",
+  "pageIndicator": "{current} / {total}",
+  "@pageIndicator": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "zoomIn": "Agrandir",
+  "zoomOut": "Réduire",
+  "selectAllText": "Sélectionner tout le texte",
+  "textCopied": "Texte copié",
+  "noTextToCopy": "Aucun texte à copier sur cette page",
+  "tipsTitle": "Conseils de lecture",
+  "tipZoom": "Pincez avec deux doigts pour agrandir ou réduire.",
+  "tipCopy": "Appuyez longuement sur le texte pour le sélectionner, puis touchez Copier.",
+  "developer": "Développeur",
+  "developerName": "Edivaldo Jorge",
+  "developerRole": "Développeur des outils ToolPDF",
+  "github": "GitHub",
+  "website": "toolpdf.org",
+  "websiteBody": "ToolPDF View fait partie de la famille d’applications de mon site toolpdf.org.",
+  "noAdsTitle": "Sans publicité, sans pistage",
+  "noAdsBody": "ToolPDF View n’affiche aucune publicité et n’envoie rien hors de votre appareil. Il lit seulement les PDF que vous ouvrez.",
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "aboutBody": "Un lecteur léger et rapide pour les PDF de votre téléphone.",
+  "openWith": "Ouvrir avec ToolPDF View",
+  "loading": "Chargement…"
+}

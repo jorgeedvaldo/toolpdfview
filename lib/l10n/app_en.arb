@@ -1,0 +1,62 @@
+{
+  "@@locale": "en",
+  "appTitle": "ToolPDF View",
+  "navFavorites": "Favourites",
+  "navRecents": "Recents",
+  "navBrowse": "Folders",
+  "about": "About",
+  "openFile": "Open a PDF",
+  "favoritesEmptyTitle": "No favourites yet",
+  "favoritesEmptyBody": "Tap the star while reading a document to keep it here.",
+  "recentsEmptyTitle": "Nothing opened yet",
+  "recentsEmptyBody": "The PDFs you open will show up here.",
+  "folderEmpty": "No PDFs in this folder",
+  "clearRecents": "Clear recents",
+  "clearRecentsQuestion": "Remove every document from the recents list?",
+  "cancel": "Cancel",
+  "clear": "Clear",
+  "remove": "Remove from list",
+  "addToFavorites": "Add to favourites",
+  "removeFromFavorites": "Remove from favourites",
+  "fileMissing": "This file is no longer on the device",
+  "couldNotOpen": "This PDF could not be opened",
+  "internalStorage": "Internal storage",
+  "shortcuts": "Shortcuts",
+  "storageRoots": "Storage",
+  "storageAccessTitle": "Let ToolPDF View find your files",
+  "storageAccessBody": "To browse folders, Android needs you to allow access to your files. You can also pick a single PDF instead, with no permission at all.",
+  "grantAccess": "Allow access",
+  "chooseFile": "Choose a file",
+  "pageIndicator": "{current} / {total}",
+  "@pageIndicator": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "zoomIn": "Zoom in",
+  "zoomOut": "Zoom out",
+  "selectAllText": "Select all text",
+  "textCopied": "Text copied",
+  "noTextToCopy": "No text to copy on this page",
+  "tipsTitle": "Reading tips",
+  "tipZoom": "Pinch with two fingers to zoom in and out.",
+  "tipCopy": "Long-press any text to select it, then tap Copy.",
+  "developer": "Developer",
+  "developerName": "Edivaldo Jorge",
+  "developerRole": "Developer of the ToolPDF tools",
+  "github": "GitHub",
+  "website": "toolpdf.org",
+  "websiteBody": "ToolPDF View belongs to the family of apps on my website toolpdf.org.",
+  "noAdsTitle": "No ads, no tracking",
+  "noAdsBody": "ToolPDF View shows no advertising and sends nothing off your device. It only reads the PDFs you open.",
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "aboutBody": "A small, fast reader for the PDFs on your phone.",
+  "openWith": "Open with ToolPDF View",
+  "loading": "Loading…"
+}
