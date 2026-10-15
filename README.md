@@ -28,7 +28,7 @@ propósito: serve também de exemplo completo de como se publica uma app Android
 
 ## Gerar o APK e o AAB
 
-O workflow [`.github/workflows/release.yml`](.github/workflows/release.yml) faz
+O workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) faz
 tudo, e corre sozinho a cada envio de código para uma branch de
 desenvolvimento. Para o correr à mão no GitHub: separador **Actions** →
 **Build release (APK + AAB)** → **Run workflow**, indicando opcionalmente a
