@@ -86,12 +86,14 @@ jobs:
       - name: Build APK
         run: |
           flutter build apk --release \
+            --target-platform android-arm,android-arm64 \
             --build-name "${{ steps.version.outputs.name }}" \
             --build-number "${{ steps.version.outputs.number }}"
 
       - name: Build App Bundle
         run: |
           flutter build appbundle --release \
+            --target-platform android-arm,android-arm64 \
             --build-name "${{ steps.version.outputs.name }}" \
             --build-number "${{ steps.version.outputs.number }}"
 

@@ -56,10 +56,12 @@ jobs:
         run: flutter test
 
       - name: Build APK
-        run: flutter build apk --release
+        # Only the two ARM architectures real phones use; x86/x86_64 are
+        # emulator-only and would roughly double the download.
+        run: flutter build apk --release --target-platform android-arm,android-arm64
 
       - name: Build App Bundle
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --target-platform android-arm,android-arm64
 
       - name: Report the sizes
         run: |

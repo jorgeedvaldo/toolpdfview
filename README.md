@@ -24,6 +24,7 @@ propósito: serve também de exemplo completo de como se publica uma app Android
 | ID da aplicação | `com.toolodfview.app` |
 | SDK mínimo | Android 7.0 (API 24) |
 | Motor de PDF | [pdfrx](https://pub.dev/packages/pdfrx) (PDFium) |
+| Arquitecturas | arm64-v8a e armeabi-v7a (as dos telemóveis) |
 
 ## Gerar o APK e o AAB
 
@@ -39,6 +40,10 @@ assinados na pasta [`releases/`](releases) na raiz do repositório:
 releases/toolpdf-view-<versão>-<código>.apk   → instalar directamente no telemóvel
 releases/toolpdf-view-<versão>-<código>.aab   → carregar na Google Play Console
 ```
+
+O APK serve qualquer telemóvel Android (ARM de 32 e 64 bits). Pela Play
+Store, o AAB entrega a cada aparelho só o que ele precisa, por isso a
+transferência fica à volta de metade do tamanho do APK.
 
 Os mesmos ficheiros ficam também disponíveis como *artifacts* da execução. Um
 `git push` de uma tag `v*` (ex.: `v1.0.1`) corre o mesmo workflow e cria ainda
