@@ -39,7 +39,9 @@ void main() {
     expect(find.text('Pastas'), findsWidgets);
   });
 
-  testWidgets('about screen credits the developer and the site', (tester) async {
+  testWidgets('about screen credits the developer and the site', (
+    tester,
+  ) async {
     await tester.pumpWidget(_wrap(const AboutScreen()));
     await tester.pumpAndSettle();
 

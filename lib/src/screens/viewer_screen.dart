@@ -133,7 +133,9 @@ class _ViewerScreenState extends State<ViewerScreen> {
               right: 0,
               bottom: 16,
               child: Center(
-                child: _Pill(child: Text(l10n.pageIndicator(_page, _pageCount))),
+                child: _Pill(
+                  child: Text(l10n.pageIndicator(_page, _pageCount)),
+                ),
               ),
             ),
           Positioned(

@@ -100,7 +100,9 @@ class AboutScreen extends StatelessWidget {
                   child: PdfMark(size: 48),
                 ),
               ),
-              child: Text(MaterialLocalizations.of(context).viewLicensesButtonLabel),
+              child: Text(
+                MaterialLocalizations.of(context).viewLicensesButtonLabel,
+              ),
             ),
           ),
           const SizedBox(height: 24),

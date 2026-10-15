@@ -42,11 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: IndexedStack(
         index: _tab,
-        children: const [
-          _FavoritesTab(),
-          _RecentsTab(),
-          BrowseTab(),
-        ],
+        children: const [_FavoritesTab(), _RecentsTab(), BrowseTab()],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _tab,
