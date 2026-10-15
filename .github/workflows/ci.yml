@@ -1,11 +1,12 @@
 name: CI
 
-# Every push and pull request is analysed, tested and compiled, so a broken
-# build never reaches the release workflow.
+# Development branches are covered by the release workflow, which runs the
+# same checks and then stores the build; this one guards main and pull
+# requests.
 on:
   push:
-    branches-ignore:
-      - 'gh-pages'
+    branches:
+      - main
     paths-ignore:
       - 'releases/**'
       - '**.md'

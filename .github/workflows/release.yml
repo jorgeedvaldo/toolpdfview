@@ -1,8 +1,8 @@
 name: Build release (APK + AAB)
 
-# Run it by hand from the Actions tab ("Run workflow"), or by pushing a tag
-# like v1.0.1. The signed APK and AAB land in the "releases/" folder at the
-# root of the repository.
+# Runs on every push to a development branch, by hand from the Actions tab
+# ("Run workflow"), or by pushing a tag like v1.0.1. The signed APK and AAB
+# land in the "releases/" folder at the root of the repository.
 on:
   workflow_dispatch:
     inputs:
@@ -20,8 +20,14 @@ on:
         required: false
         default: true
   push:
+    branches:
+      - 'claude/**'
     tags:
       - 'v*'
+    # The commit that stores the build must not start another build.
+    paths-ignore:
+      - 'releases/**'
+      - '**.md'
 
 concurrency:
   group: release-${{ github.ref }}
