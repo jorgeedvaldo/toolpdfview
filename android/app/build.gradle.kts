@@ -2,7 +2,6 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -26,17 +25,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     defaultConfig {
         applicationId = "com.toolodfview.app"
         minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        resourceConfigurations += listOf("en", "pt", "es", "fr", "ru")
     }
 
     signingConfigs {
@@ -64,13 +58,18 @@ android {
 
     packaging {
         // Keeps the shipped binary as small as possible.
-        jniLibs.useLegacyPackaging = false
         resources.excludes += setOf(
             "META-INF/*.version",
             "META-INF/*.kotlin_module",
             "DebugProbesKt.bin",
             "kotlin-tooling-metadata.json",
         )
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 
