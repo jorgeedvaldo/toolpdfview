@@ -1,10 +1,14 @@
 package com.toolodfview.app
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.OpenableColumns
+import android.provider.Settings
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -29,6 +33,9 @@ class MainActivity : FlutterActivity() {
     /** Pending reply for a [pickDocument] call. */
     private var pickResult: MethodChannel.Result? = null
 
+    /** Pending reply for a storage access request. */
+    private var accessResult: MethodChannel.Result? = null
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).apply {
@@ -42,6 +49,12 @@ class MainActivity : FlutterActivity() {
                         pickResult?.success(null)
                         pickResult = result
                         openSystemPicker()
+                    }
+                    "hasStorageAccess" -> result.success(hasStorageAccess())
+                    "requestStorageAccess" -> {
+                        accessResult?.success(hasStorageAccess())
+                        accessResult = result
+                        requestStorageAccess()
                     }
                     else -> result.notImplemented()
                 }
@@ -60,6 +73,61 @@ class MainActivity : FlutterActivity() {
         } else {
             sink.invokeMethod("openDocument", document)
         }
+    }
+
+    /**
+     * Whether the app may list the PDFs in shared storage.
+     *
+     * Android 11 and later answer this with "All files access"; older versions
+     * with the legacy read permission.
+     */
+    private fun hasStorageAccess(): Boolean =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Environment.isExternalStorageManager()
+        } else {
+            checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_GRANTED
+        }
+
+    /** Asks for whichever permission this Android version needs. */
+    private fun requestStorageAccess() {
+        if (hasStorageAccess()) {
+            accessResult?.success(true)
+            accessResult = null
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // Sends the user to the system settings page; the answer comes back
+            // through onActivityResult.
+            val intent = Intent(
+                Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                Uri.parse("package:$packageName"),
+            )
+            try {
+                startActivityForResult(intent, ACCESS_REQUEST)
+            } catch (error: Exception) {
+                startActivityForResult(
+                    Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION),
+                    ACCESS_REQUEST,
+                )
+            }
+        } else {
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                ACCESS_REQUEST,
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode != ACCESS_REQUEST) return
+        accessResult?.success(hasStorageAccess())
+        accessResult = null
     }
 
     /**
@@ -82,11 +150,18 @@ class MainActivity : FlutterActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode != PICK_REQUEST) return
-        val reply = pickResult ?: return
-        pickResult = null
-        val uri = if (resultCode == Activity.RESULT_OK) data?.data else null
-        reply.success(uri?.let { runCatching { copyToCache(it) }.getOrNull() })
+        when (requestCode) {
+            ACCESS_REQUEST -> {
+                accessResult?.success(hasStorageAccess())
+                accessResult = null
+            }
+            PICK_REQUEST -> {
+                val reply = pickResult ?: return
+                pickResult = null
+                val uri = if (resultCode == Activity.RESULT_OK) data?.data else null
+                reply.success(uri?.let { runCatching { copyToCache(it) }.getOrNull() })
+            }
+        }
     }
 
     private fun documentFrom(intent: Intent?): Map<String, String>? {
@@ -147,5 +222,6 @@ class MainActivity : FlutterActivity() {
     private companion object {
         const val CHANNEL = "com.toolodfview.app/documents"
         const val PICK_REQUEST = 0x70 // 'p'
+        const val ACCESS_REQUEST = 0x61 // 'a'
     }
 }

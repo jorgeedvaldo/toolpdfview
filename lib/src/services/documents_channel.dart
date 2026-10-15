@@ -18,6 +18,15 @@ class DocumentsChannel {
     return _entryFrom(result);
   }
 
+  /// Whether the app may list the PDFs in shared storage.
+  static Future<bool> hasStorageAccess() async =>
+      await _channel.invokeMethod<bool>('hasStorageAccess') ?? false;
+
+  /// Asks for the storage permission this Android version needs and returns
+  /// what the user decided.
+  static Future<bool> requestStorageAccess() async =>
+      await _channel.invokeMethod<bool>('requestStorageAccess') ?? false;
+
   /// Opens the system document picker and returns the chosen PDF, or null
   /// when the user backs out. Needs no storage permission.
   static Future<PdfEntry?> pickDocument() async {

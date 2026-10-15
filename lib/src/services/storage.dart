@@ -1,6 +1,8 @@
 import 'dart:io';
 
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/services.dart';
+
+import 'documents_channel.dart';
 
 /// Read-only access to the PDFs stored on the device.
 class Storage {
@@ -24,6 +26,29 @@ class Storage {
   /// True when the app can actually list the shared storage.
   static Future<bool> canRead() async {
     try {
+      if (await DocumentsChannel.hasStorageAccess()) return true;
+    } on MissingPluginException {
+      // Not on Android; fall through to simply trying to read.
+    }
+    return _probe();
+  }
+
+  /// Asks for the permission that the running Android version needs.
+  ///
+  /// Android 10 and older are happy with the legacy read permission; from
+  /// Android 11 on, documents are only reachable through "All files access".
+  static Future<bool> requestAccess() async {
+    if (await canRead()) return true;
+    try {
+      return await DocumentsChannel.requestStorageAccess() || await _probe();
+    } on MissingPluginException {
+      return _probe();
+    }
+  }
+
+  /// Last resort: see whether the primary storage can simply be listed.
+  static Future<bool> _probe() async {
+    try {
       await Directory(_primary).list().first;
       return true;
     } on StateError {
@@ -31,19 +56,6 @@ class Storage {
     } on FileSystemException {
       return false;
     }
-  }
-
-  /// Asks for the permission that the running Android version needs.
-  ///
-  /// Android 12 and older are happy with the legacy read permission; from
-  /// Android 13 on, documents are only reachable through "All files access".
-  static Future<bool> requestAccess() async {
-    if (await canRead()) return true;
-    if (await Permission.storage.request().isGranted && await canRead()) {
-      return true;
-    }
-    final status = await Permission.manageExternalStorage.request();
-    return status.isGranted && await canRead();
   }
 
   /// Storage roots: internal storage first, then any removable card.
