@@ -1,0 +1,41 @@
+name: toolpdf_view
+description: "ToolPDF View - a fast, lightweight and ad-free PDF reader for Android."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  pdfrx: ^2.6.5
+  shared_preferences: ^2.5.6
+  url_launcher: ^6.3.3
+  path_provider: ^2.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+# Launcher icon generation (dev-time only, nothing is bundled into the app):
+#   dart run flutter_launcher_icons
+# Regenerate the source images first with: python3 tool/generate_icons.py
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#D32F2F"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  adaptive_icon_monochrome: "assets/icon/icon_foreground.png"
+  remove_alpha_ios: true

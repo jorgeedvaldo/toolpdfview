@@ -1,0 +1,62 @@
+{
+  "@@locale": "pt",
+  "appTitle": "ToolPDF View",
+  "navFavorites": "Favoritos",
+  "navRecents": "Recentes",
+  "navBrowse": "Pastas",
+  "about": "Sobre",
+  "openFile": "Abrir um PDF",
+  "favoritesEmptyTitle": "Ainda sem favoritos",
+  "favoritesEmptyBody": "Toque na estrela enquanto lê um documento para o guardar aqui.",
+  "recentsEmptyTitle": "Ainda não abriu nada",
+  "recentsEmptyBody": "Os PDFs que abrir aparecem aqui.",
+  "folderEmpty": "Nenhum PDF nesta pasta",
+  "clearRecents": "Limpar recentes",
+  "clearRecentsQuestion": "Remover todos os documentos da lista de recentes?",
+  "cancel": "Cancelar",
+  "clear": "Limpar",
+  "remove": "Remover da lista",
+  "addToFavorites": "Adicionar aos favoritos",
+  "removeFromFavorites": "Remover dos favoritos",
+  "fileMissing": "Este ficheiro já não está no dispositivo",
+  "couldNotOpen": "Não foi possível abrir este PDF",
+  "internalStorage": "Armazenamento interno",
+  "shortcuts": "Atalhos",
+  "storageRoots": "Armazenamento",
+  "storageAccessTitle": "Deixe o ToolPDF View encontrar os seus ficheiros",
+  "storageAccessBody": "Para explorar pastas, o Android precisa da sua autorização de acesso aos ficheiros. Também pode escolher apenas um PDF, sem nenhuma permissão.",
+  "grantAccess": "Permitir acesso",
+  "chooseFile": "Escolher um ficheiro",
+  "pageIndicator": "{current} / {total}",
+  "@pageIndicator": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "zoomIn": "Aproximar",
+  "zoomOut": "Afastar",
+  "selectAllText": "Selecionar todo o texto",
+  "textCopied": "Texto copiado",
+  "noTextToCopy": "Não há texto para copiar nesta página",
+  "tipsTitle": "Dicas de leitura",
+  "tipZoom": "Junte ou afaste dois dedos para ampliar e reduzir.",
+  "tipCopy": "Mantenha o dedo sobre o texto para o selecionar e toque em Copiar.",
+  "developer": "Programador",
+  "developerName": "Edivaldo Jorge",
+  "developerRole": "Programador das ferramentas ToolPDF",
+  "github": "GitHub",
+  "website": "toolpdf.org",
+  "websiteBody": "O ToolPDF View faz parte da família de aplicações do meu site toolpdf.org.",
+  "noAdsTitle": "Sem anúncios, sem rastreio",
+  "noAdsBody": "O ToolPDF View não mostra publicidade e não envia nada para fora do seu dispositivo. Apenas lê os PDFs que abrir.",
+  "versionLabel": "Versão {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "aboutBody": "Um leitor pequeno e rápido para os PDFs do seu telemóvel.",
+  "openWith": "Abrir com o ToolPDF View",
+  "loading": "A carregar…"
+}

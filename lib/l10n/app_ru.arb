@@ -1,0 +1,62 @@
+{
+  "@@locale": "ru",
+  "appTitle": "ToolPDF View",
+  "navFavorites": "Избранное",
+  "navRecents": "Недавние",
+  "navBrowse": "Папки",
+  "about": "О приложении",
+  "openFile": "Открыть PDF",
+  "favoritesEmptyTitle": "Избранного пока нет",
+  "favoritesEmptyBody": "Нажмите звёздочку при чтении документа, чтобы сохранить его здесь.",
+  "recentsEmptyTitle": "Вы пока ничего не открывали",
+  "recentsEmptyBody": "Открытые PDF-файлы появятся здесь.",
+  "folderEmpty": "В этой папке нет PDF-файлов",
+  "clearRecents": "Очистить недавние",
+  "clearRecentsQuestion": "Удалить все документы из списка недавних?",
+  "cancel": "Отмена",
+  "clear": "Очистить",
+  "remove": "Убрать из списка",
+  "addToFavorites": "Добавить в избранное",
+  "removeFromFavorites": "Убрать из избранного",
+  "fileMissing": "Этого файла больше нет на устройстве",
+  "couldNotOpen": "Не удалось открыть этот PDF-файл",
+  "internalStorage": "Внутренняя память",
+  "shortcuts": "Быстрый доступ",
+  "storageRoots": "Хранилище",
+  "storageAccessTitle": "Разрешите ToolPDF View найти ваши файлы",
+  "storageAccessBody": "Чтобы просматривать папки, Android требует разрешение на доступ к файлам. Можно также выбрать один PDF-файл — без каких-либо разрешений.",
+  "grantAccess": "Разрешить доступ",
+  "chooseFile": "Выбрать файл",
+  "pageIndicator": "{current} / {total}",
+  "@pageIndicator": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "zoomIn": "Увеличить",
+  "zoomOut": "Уменьшить",
+  "selectAllText": "Выделить весь текст",
+  "textCopied": "Текст скопирован",
+  "noTextToCopy": "На этой странице нечего копировать",
+  "tipsTitle": "Советы по чтению",
+  "tipZoom": "Сводите и разводите два пальца, чтобы менять масштаб.",
+  "tipCopy": "Нажмите и удерживайте текст, чтобы выделить его, затем нажмите «Копировать».",
+  "developer": "Разработчик",
+  "developerName": "Edivaldo Jorge",
+  "developerRole": "Разработчик инструментов ToolPDF",
+  "github": "GitHub",
+  "website": "toolpdf.org",
+  "websiteBody": "ToolPDF View входит в семейство приложений моего сайта toolpdf.org.",
+  "noAdsTitle": "Без рекламы и слежки",
+  "noAdsBody": "ToolPDF View не показывает рекламу и ничего не отправляет с вашего устройства. Он только читает открытые вами PDF-файлы.",
+  "versionLabel": "Версия {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "aboutBody": "Небольшая и быстрая читалка для PDF-файлов на вашем телефоне.",
+  "openWith": "Открыть в ToolPDF View",
+  "loading": "Загрузка…"
+}
