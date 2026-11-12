@@ -51,6 +51,8 @@ class MainActivity : FlutterActivity() {
                         openSystemPicker()
                     }
                     "hasStorageAccess" -> result.success(hasStorageAccess())
+                    "storageNeedsSettingsPage" ->
+                        result.success(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
                     "requestStorageAccess" -> {
                         accessResult?.success(hasStorageAccess())
                         accessResult = result

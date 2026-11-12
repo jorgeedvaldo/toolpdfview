@@ -30,15 +30,17 @@
   "pageIndicator": "{current} / {total}",
   "@pageIndicator": {
     "placeholders": {
-      "current": { "type": "int" },
-      "total": { "type": "int" }
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "zoomIn": "Acercar",
   "zoomOut": "Alejar",
-  "selectAllText": "Seleccionar todo el texto",
   "textCopied": "Texto copiado",
-  "noTextToCopy": "No hay texto que copiar en esta página",
   "tipsTitle": "Consejos de lectura",
   "tipZoom": "Pellizca con dos dedos para acercar y alejar.",
   "tipCopy": "Mantén pulsado el texto para seleccionarlo y toca Copiar.",
@@ -53,10 +55,38 @@
   "versionLabel": "Versión {version}",
   "@versionLabel": {
     "placeholders": {
-      "version": { "type": "String" }
+      "version": {
+        "type": "String"
+      }
     }
   },
   "aboutBody": "Un lector pequeño y rápido para los PDF de tu teléfono.",
-  "openWith": "Abrir con ToolPDF View",
-  "loading": "Cargando…"
+  "copyText": "Copiar texto",
+  "copyPageText": "Copiar el texto de esta página",
+  "copyDocumentText": "Copiar el texto de todo el documento",
+  "pageTextCopied": "Texto de la página copiado",
+  "documentTextCopied": "Texto del documento copiado",
+  "copyingText": "Copiando el texto…",
+  "noTextInDocument": "Este documento no tiene texto que copiar",
+  "allPdfs": "Todos los PDF del dispositivo",
+  "allPdfsBody": "Todos los PDF encontrados en el almacenamiento, los más recientes primero",
+  "searchPdfs": "Buscar por nombre",
+  "noPdfsFoundTitle": "No se encontró ningún PDF",
+  "noPdfsFoundBody": "Los PDF que descargues o recibas aparecerán aquí.",
+  "firstRunTitle": "Permite el acceso a tus PDF",
+  "firstRunBody": "ToolPDF View necesita acceso a los archivos de este dispositivo para encontrar y abrir tus PDF. Nada sale de tu teléfono.",
+  "firstRunSettingsHint": "En la pantalla siguiente, activa el interruptor de ToolPDF View y vuelve atrás.",
+  "notNow": "Ahora no",
+  "accessGranted": "Acceso permitido. Tus PDF están listos.",
+  "accessDenied": "No se permitió el acceso. Puedes abrir un archivo cada vez.",
+  "passwordTitle": "Este PDF está protegido",
+  "passwordHint": "Contraseña",
+  "passwordWrong": "Contraseña incorrecta. Inténtalo de nuevo.",
+  "open": "Abrir",
+  "close": "Cerrar",
+  "refresh": "Actualizar",
+  "somethingWentWrong": "Algo salió mal aquí",
+  "copyNotAllowed": "El autor de este PDF no permite copiar el texto",
+  "goToPage": "Ir a la página",
+  "go": "Ir"
 }

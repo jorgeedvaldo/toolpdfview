@@ -1,10 +1,12 @@
 name: Build release (APK + AAB)
 
-# Builds, checks and stores ToolPDF View.
+# Builds, tests and stores ToolPDF View.
 #
 # It runs on every push to a development branch, by hand from the Actions tab
 # ("Run workflow"), and on a tag like v1.0.1. The signed APK and AAB land in
-# the "releases/" folder at the root of the repository.
+# the "releases/" folder at the root of the repository - but only after the
+# app has passed its tests, including a walk-through on a real Android
+# emulator.
 on:
   push:
     branches:
@@ -15,6 +17,7 @@ on:
     # The commit that stores a build must not start another build.
     paths-ignore:
       - 'releases/**'
+      - 'docs/screenshots/**'
       - '**.md'
   pull_request:
   workflow_dispatch:
@@ -44,6 +47,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 75
     permissions:
       contents: write
 
@@ -71,13 +75,23 @@ jobs:
         run: flutter gen-l10n
 
       - name: Check formatting
-        run: dart format --output=none --set-exit-if-changed lib test tool
+        run: dart format --output=none --set-exit-if-changed lib test integration_test
 
       - name: Analyze
         run: flutter analyze
 
-      - name: Test
+      - name: Unit and widget tests
         run: flutter test
+
+      # The same code, on the real rendering engine with the real PDFium:
+      # opening, zooming, selecting and copying text in all five languages.
+      - name: Install what the desktop test build needs
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libgtk-3-dev ninja-build clang cmake pkg-config xvfb python3-pil
+
+      - name: Integration tests
+        run: xvfb-run -a -s "-screen 0 1280x1024x24" flutter test integration_test -d linux
 
       - name: Work out the version
         id: version
@@ -118,6 +132,8 @@ jobs:
           set -euo pipefail
           version="${{ steps.version.outputs.name }}-${{ steps.version.outputs.number }}"
           mkdir -p releases
+          # Only the current build lives here; older ones stay in the history.
+          rm -f releases/*.apk releases/*.aab
           apk="releases/toolpdf-view-${version}.apk"
           aab="releases/toolpdf-view-${version}.aab"
           cp build/app/outputs/flutter-apk/app-release.apk "$apk"
@@ -143,12 +159,45 @@ jobs:
           echo "aab=$aab" >> "$GITHUB_OUTPUT"
           ls -lh releases/
 
+      # The last word belongs to a real Android device: the release build is
+      # installed on an emulator set to Portuguese and used like a person
+      # would - grant access, browse, open a PDF, long-press, copy.
+      - name: Build the same release for the emulator (x86_64)
+        run: |
+          flutter build apk --release \
+            --target-platform android-x64 \
+            --dart-define=TOOLPDF_E2E=true \
+            --build-name "${{ steps.version.outputs.name }}" \
+            --build-number "${{ steps.version.outputs.number }}"
+          cp build/app/outputs/flutter-apk/app-release.apk build/e2e.apk
+
+      - name: Let the emulator use hardware acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: End-to-end test on an Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
+          script: python3 tool/e2e_android.py build/e2e.apk
+
       - name: Upload the artifacts to this run
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: toolpdf-view-${{ steps.version.outputs.full }}
-          path: releases/*
-          if-no-files-found: error
+          name: toolpdf-view-${{ steps.version.outputs.full || github.sha }}
+          path: |
+            releases/*
+            docs/screenshots/*
+          if-no-files-found: warn
           retention-days: 30
 
       - name: Commit the artifacts into the repository
@@ -157,7 +206,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add releases
+          git add releases docs/screenshots
           if git diff --cached --quiet; then
             echo 'Nothing new to commit.'
             exit 0

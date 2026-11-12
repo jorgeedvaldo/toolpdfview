@@ -30,15 +30,17 @@
   "pageIndicator": "{current} / {total}",
   "@pageIndicator": {
     "placeholders": {
-      "current": { "type": "int" },
-      "total": { "type": "int" }
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "zoomIn": "Agrandir",
   "zoomOut": "Réduire",
-  "selectAllText": "Sélectionner tout le texte",
   "textCopied": "Texte copié",
-  "noTextToCopy": "Aucun texte à copier sur cette page",
   "tipsTitle": "Conseils de lecture",
   "tipZoom": "Pincez avec deux doigts pour agrandir ou réduire.",
   "tipCopy": "Appuyez longuement sur le texte pour le sélectionner, puis touchez Copier.",
@@ -53,10 +55,38 @@
   "versionLabel": "Version {version}",
   "@versionLabel": {
     "placeholders": {
-      "version": { "type": "String" }
+      "version": {
+        "type": "String"
+      }
     }
   },
   "aboutBody": "Un lecteur léger et rapide pour les PDF de votre téléphone.",
-  "openWith": "Ouvrir avec ToolPDF View",
-  "loading": "Chargement…"
+  "copyText": "Copier le texte",
+  "copyPageText": "Copier le texte de cette page",
+  "copyDocumentText": "Copier le texte de tout le document",
+  "pageTextCopied": "Texte de la page copié",
+  "documentTextCopied": "Texte du document copié",
+  "copyingText": "Copie du texte…",
+  "noTextInDocument": "Ce document ne contient aucun texte à copier",
+  "allPdfs": "Tous les PDF de l’appareil",
+  "allPdfsBody": "Tous les PDF trouvés dans le stockage, les plus récents d’abord",
+  "searchPdfs": "Rechercher par nom",
+  "noPdfsFoundTitle": "Aucun PDF trouvé",
+  "noPdfsFoundBody": "Les PDF que vous téléchargez ou recevez apparaîtront ici.",
+  "firstRunTitle": "Autorisez l’accès à vos PDF",
+  "firstRunBody": "ToolPDF View a besoin d’accéder aux fichiers de cet appareil pour trouver et ouvrir vos PDF. Rien ne quitte votre téléphone.",
+  "firstRunSettingsHint": "Sur l’écran suivant, activez l’interrupteur de ToolPDF View puis revenez.",
+  "notNow": "Plus tard",
+  "accessGranted": "Accès autorisé. Vos PDF sont prêts.",
+  "accessDenied": "L’accès n’a pas été autorisé. Vous pouvez ouvrir un fichier à la fois.",
+  "passwordTitle": "Ce PDF est protégé",
+  "passwordHint": "Mot de passe",
+  "passwordWrong": "Mot de passe incorrect. Réessayez.",
+  "open": "Ouvrir",
+  "close": "Fermer",
+  "refresh": "Actualiser",
+  "somethingWentWrong": "Un problème est survenu ici",
+  "copyNotAllowed": "L’auteur de ce PDF n’autorise pas la copie du texte",
+  "goToPage": "Aller à la page",
+  "go": "Aller"
 }
