@@ -45,6 +45,7 @@ class PdfEntry {
 class Library extends ChangeNotifier {
   static const _recentsKey = 'recents';
   static const _favoritesKey = 'favorites';
+  static const _storagePromptKey = 'storage_prompt_seen';
   static const _maxRecents = 60;
 
   SharedPreferences? _prefs;
@@ -62,6 +63,14 @@ class Library extends ChangeNotifier {
   }
 
   bool isFavorite(String path) => _favorites.any((e) => e.path == path);
+
+  /// Whether the first-run request for storage access was already shown, so
+  /// the app asks once and then remembers the answer.
+  bool get storagePromptSeen => _prefs?.getBool(_storagePromptKey) ?? false;
+
+  Future<void> markStoragePromptSeen() async {
+    await _prefs?.setBool(_storagePromptKey, true);
+  }
 
   /// Moves [entry] to the top of the recents list.
   Future<void> remember(PdfEntry entry) async {
@@ -114,7 +123,8 @@ class Library extends ChangeNotifier {
       return list
           .map((e) => PdfEntry.fromJson(e as Map<String, dynamic>))
           .toList();
-    } on FormatException {
+    } on Object {
+      // A damaged list must never keep the app from starting.
       return const [];
     }
   }

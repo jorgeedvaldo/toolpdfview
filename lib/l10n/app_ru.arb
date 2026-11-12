@@ -30,15 +30,17 @@
   "pageIndicator": "{current} / {total}",
   "@pageIndicator": {
     "placeholders": {
-      "current": { "type": "int" },
-      "total": { "type": "int" }
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "zoomIn": "Увеличить",
   "zoomOut": "Уменьшить",
-  "selectAllText": "Выделить весь текст",
   "textCopied": "Текст скопирован",
-  "noTextToCopy": "На этой странице нечего копировать",
   "tipsTitle": "Советы по чтению",
   "tipZoom": "Сводите и разводите два пальца, чтобы менять масштаб.",
   "tipCopy": "Нажмите и удерживайте текст, чтобы выделить его, затем нажмите «Копировать».",
@@ -53,10 +55,38 @@
   "versionLabel": "Версия {version}",
   "@versionLabel": {
     "placeholders": {
-      "version": { "type": "String" }
+      "version": {
+        "type": "String"
+      }
     }
   },
   "aboutBody": "Небольшая и быстрая читалка для PDF-файлов на вашем телефоне.",
-  "openWith": "Открыть в ToolPDF View",
-  "loading": "Загрузка…"
+  "copyText": "Копировать текст",
+  "copyPageText": "Скопировать текст этой страницы",
+  "copyDocumentText": "Скопировать текст всего документа",
+  "pageTextCopied": "Текст страницы скопирован",
+  "documentTextCopied": "Текст документа скопирован",
+  "copyingText": "Копирование текста…",
+  "noTextInDocument": "В этом документе нет текста для копирования",
+  "allPdfs": "Все PDF на устройстве",
+  "allPdfsBody": "Все PDF, найденные в памяти, сначала новые",
+  "searchPdfs": "Поиск по названию",
+  "noPdfsFoundTitle": "PDF-файлы не найдены",
+  "noPdfsFoundBody": "Скачанные и полученные PDF-файлы появятся здесь.",
+  "firstRunTitle": "Разрешите доступ к вашим PDF",
+  "firstRunBody": "ToolPDF View нужен доступ к файлам на устройстве, чтобы находить и открывать ваши PDF. Ничто не покидает ваш телефон.",
+  "firstRunSettingsHint": "На следующем экране включите переключатель для ToolPDF View и вернитесь назад.",
+  "notNow": "Не сейчас",
+  "accessGranted": "Доступ разрешён. Ваши PDF готовы.",
+  "accessDenied": "Доступ не разрешён. Вы можете открывать файлы по одному.",
+  "passwordTitle": "Этот PDF защищён",
+  "passwordHint": "Пароль",
+  "passwordWrong": "Неверный пароль. Попробуйте ещё раз.",
+  "open": "Открыть",
+  "close": "Закрыть",
+  "refresh": "Обновить",
+  "somethingWentWrong": "Здесь что-то пошло не так",
+  "copyNotAllowed": "Автор этого PDF запретил копирование текста",
+  "goToPage": "Перейти к странице",
+  "go": "Перейти"
 }

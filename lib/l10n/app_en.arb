@@ -30,15 +30,17 @@
   "pageIndicator": "{current} / {total}",
   "@pageIndicator": {
     "placeholders": {
-      "current": { "type": "int" },
-      "total": { "type": "int" }
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "zoomIn": "Zoom in",
   "zoomOut": "Zoom out",
-  "selectAllText": "Select all text",
   "textCopied": "Text copied",
-  "noTextToCopy": "No text to copy on this page",
   "tipsTitle": "Reading tips",
   "tipZoom": "Pinch with two fingers to zoom in and out.",
   "tipCopy": "Long-press any text to select it, then tap Copy.",
@@ -53,10 +55,38 @@
   "versionLabel": "Version {version}",
   "@versionLabel": {
     "placeholders": {
-      "version": { "type": "String" }
+      "version": {
+        "type": "String"
+      }
     }
   },
   "aboutBody": "A small, fast reader for the PDFs on your phone.",
-  "openWith": "Open with ToolPDF View",
-  "loading": "Loading…"
+  "copyText": "Copy text",
+  "copyPageText": "Copy the text of this page",
+  "copyDocumentText": "Copy the text of the whole document",
+  "pageTextCopied": "Page text copied",
+  "documentTextCopied": "Document text copied",
+  "copyingText": "Copying text…",
+  "noTextInDocument": "This document has no text to copy",
+  "allPdfs": "All PDFs on this device",
+  "allPdfsBody": "Every PDF found in your storage, newest first",
+  "searchPdfs": "Search by name",
+  "noPdfsFoundTitle": "No PDFs found",
+  "noPdfsFoundBody": "PDFs you download or receive will show up here.",
+  "firstRunTitle": "Allow access to your PDFs",
+  "firstRunBody": "ToolPDF View needs access to the files on this device to find and open your PDFs. Nothing ever leaves your phone.",
+  "firstRunSettingsHint": "On the next screen, turn on the switch for ToolPDF View and come back.",
+  "notNow": "Not now",
+  "accessGranted": "Access allowed. Your PDFs are ready.",
+  "accessDenied": "Access was not allowed. You can still open a single file.",
+  "passwordTitle": "This PDF is protected",
+  "passwordHint": "Password",
+  "passwordWrong": "Wrong password. Try again.",
+  "open": "Open",
+  "close": "Close",
+  "refresh": "Refresh",
+  "somethingWentWrong": "Something went wrong here",
+  "copyNotAllowed": "The author of this PDF does not allow copying its text",
+  "goToPage": "Go to page",
+  "go": "Go"
 }

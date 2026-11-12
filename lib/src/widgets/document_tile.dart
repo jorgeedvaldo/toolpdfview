@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import '../services/library.dart';
@@ -13,6 +11,7 @@ class DocumentTile extends StatelessWidget {
     required this.onTap,
     this.onRemove,
     this.removeLabel,
+    this.size,
     super.key,
   });
 
@@ -21,13 +20,18 @@ class DocumentTile extends StatelessWidget {
   final VoidCallback? onRemove;
   final String? removeLabel;
 
+  /// File size when the caller already knows it; read from disk otherwise.
+  final int? size;
+
   @override
   Widget build(BuildContext context) {
-    final file = File(entry.path);
-    final exists = file.existsSync();
+    // A file the app can no longer read is treated exactly like a missing
+    // one: shown dimmed, never allowed to break the list.
+    final size = this.size ?? Storage.sizeOf(entry.path);
+    final exists = size != null;
     final theme = Theme.of(context);
     final details = <String>[
-      if (exists) Storage.formatSize(file.lengthSync()),
+      if (size != null) Storage.formatSize(size),
       _folderOf(entry.path),
     ];
 
