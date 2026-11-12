@@ -9,10 +9,17 @@ propósito: serve também de exemplo completo de como se publica uma app Android
 
 ## O que faz
 
-- Abre qualquer PDF do telemóvel, com **zoom de dois dedos** e **selecção e
-  cópia de texto** (toque longo sobre o texto → Copiar).
+- Abre qualquer PDF do telemóvel, com **zoom de dois dedos** (ou duplo toque) e
+  **selecção e cópia de texto**: toque longo sobre uma palavra → Copiar. O
+  botão de cópia da barra superior copia o texto da página ou do documento
+  inteiro de uma só vez.
 - Três separadores: **Favoritos**, **Recentes** e **Pastas** (explorador do
-  armazenamento do dispositivo).
+  armazenamento do dispositivo), com **Todos os PDF do dispositivo** numa única
+  lista pesquisável por nome.
+- Pede o acesso aos ficheiros logo na primeira abertura, uma única vez. Quem
+  preferir não o dar pode abrir ficheiros um a um pelo selector do sistema.
+- Abre PDF protegidos por palavra-passe e salta para qualquer página (toque no
+  indicador de página).
 - Fica registado no Android como aplicação para abrir PDFs: ao tocar num PDF no
   WhatsApp, Gmail, Downloads ou num gestor de ficheiros, o ToolPDF View aparece
   em "Abrir com".
@@ -34,8 +41,9 @@ desenvolvimento. Para o correr à mão no GitHub: separador **Actions** →
 **Build release (APK + AAB)** → **Run workflow**, indicando opcionalmente a
 versão (ex.: `1.0.1`) e o código de versão (ex.: `2`).
 
-O workflow analisa o código, corre os testes, compila, e grava os ficheiros
-assinados na pasta [`releases/`](releases) na raiz do repositório:
+O workflow analisa o código, corre todos os testes (ver [Testes](#testes)),
+compila e — só se tudo passar — grava os ficheiros assinados na pasta
+[`releases/`](releases) na raiz do repositório:
 
 ```
 releases/toolpdf-view-<versão>-<código>.apk   → instalar directamente no telemóvel
@@ -87,6 +95,36 @@ importante. Para substituir a chave por uma privada: gerar outra com
 toolpdfview -keyalg RSA -keysize 2048 -validity 10000`, actualizar
 `android/key.properties` e manter ambos fora do repositório.
 
+## Testes
+
+Três níveis, todos corridos pelo workflow antes de qualquer compilação ser
+guardada:
+
+| Nível | O que verifica | Como correr |
+| --- | --- | --- |
+| Unitários e de widgets ([`test/`](test)) | Favoritos e recentes, pesquisa de PDF, pedido de acesso na primeira abertura, traduções, ecrã de erro | `flutter test` |
+| Integração ([`integration_test/`](integration_test)) | A app a correr no motor gráfico real com o PDFium real: abrir, zoom, ir para página, PDF com palavra-passe, ficheiro corrompido, e **toque longo → Copiar nas cinco línguas** | `xvfb-run -a flutter test integration_test -d linux` |
+| Ponta a ponta ([`tool/e2e_android.py`](tool/e2e_android.py)) | O APK de release num emulador Android em português, usado como uma pessoa o usaria: conceder o acesso nas definições, navegar até Download, abrir um PDF, seleccionar e copiar, "abrir com" a partir de outra app | corre no workflow |
+
+As capturas de ecrã do último teste de ponta a ponta ficam em
+[`docs/screenshots/`](docs/screenshots):
+
+| Primeira abertura | Pastas | Leitor | Copiar |
+| --- | --- | --- | --- |
+| ![Pedido de acesso](docs/screenshots/02_first_launch.png) | ![Pastas](docs/screenshots/05_folders.png) | ![PDF aberto](docs/screenshots/07_pdf_open.png) | ![Menu Copiar](docs/screenshots/08_copy_menu.png) |
+
+### O erro do ecrã cinzento (e porque há testes em cinco línguas)
+
+Na versão 1.0.0, um toque longo sobre o texto cobria o documento com uma
+caixa cinzenta — mas só em telemóveis que não estivessem em inglês. O motor de
+PDF desenha o menu "Copiar" com o pacote `material_ui`, que procura as suas
+traduções e só tinha reserva para inglês; em português a procura devolvia
+nulo, o menu falhava ao ser construído e o Flutter, em modo release, mostra um
+widget falhado como uma caixa cinzenta do tamanho do espaço que ocupa. Desde a
+1.0.1 a app fornece essas traduções em todas as línguas, desenha o menu com os
+seus próprios componentes e substitui a caixa cinzenta por uma mensagem curta —
+e os testes de integração repetem o gesto em cada língua.
+
 ## Compilar localmente
 
 Com o [Flutter](https://docs.flutter.dev/get-started/install) 3.47 ou mais
@@ -96,6 +134,7 @@ recente e o Android SDK instalados:
 flutter pub get
 flutter gen-l10n       # gera as traduções a partir de lib/l10n/*.arb
 flutter test
+xvfb-run -a flutter test integration_test -d linux   # precisa de libgtk-3-dev
 flutter build apk --release
 flutter build appbundle --release
 ```
@@ -110,19 +149,27 @@ lib/
     app.dart                    MaterialApp, tema, PDFs recebidos de outras apps
     theme.dart                  cores da marca
     screens/
-      home_screen.dart          separadores Favoritos / Recentes / Pastas
+      home_screen.dart          separadores e pedido de acesso inicial
       browse_tab.dart           explorador de pastas
+      all_pdfs_screen.dart      todos os PDF do dispositivo, com pesquisa
       viewer_screen.dart        leitor: zoom, selecção e cópia de texto
       about_screen.dart         ecrã do programador
     services/
       library.dart              favoritos e recentes (guardados no aparelho)
-      storage.dart              leitura de pastas e permissões
+      storage.dart              leitura de pastas e pesquisa de PDF
+      storage_access.dart       estado da permissão de acesso aos ficheiros
       documents_channel.dart    ponte para o Android
-    widgets/                    ícone desenhado em código e lista de documentos
+    widgets/                    ícone desenhado em código, listas, ecrã de erro
 android/app/src/main/
   AndroidManifest.xml           filtros "Abrir com" para PDF
-  kotlin/.../MainActivity.kt    recebe PDFs de outras apps, selector do sistema
-tool/generate_icons.py          gera os ícones (PDF branco sobre vermelho)
+  kotlin/.../MainActivity.kt    recebe PDFs de outras apps, permissões, selector
+linux/                          alvo desktop, usado só pelos testes de integração
+test/                           testes unitários e de widgets
+integration_test/               testes no motor real (e os PDF de teste)
+tool/
+  generate_icons.py             gera os ícones (PDF branco sobre vermelho)
+  generate_test_pdf.py          gera os PDF usados nos testes
+  e2e_android.py                teste de ponta a ponta no emulador Android
 ```
 
 ## Ícone
